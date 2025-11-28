@@ -1,0 +1,37 @@
+import { useCallback, useState } from "react";
+
+const ChildButton = ({ onBook, name }) => {
+  console.log(`Child Rendered: ${name}`);
+  return (
+    <button onClick={onBook} style={{ margin: "5px" }}>
+      Book {name}
+    </button>
+  );
+};
+
+export default function EventBooking() {
+  const [count, setCount] = useState(0);
+
+  const handleBookEventA = useCallback(() => {
+    console.log("Event A Booked!");
+  }, []);
+
+  const handleBookEventB = useCallback(() => {
+    console.log("Event B Booked!");
+  }, []);
+
+  return (
+    <div style={{ textAlign: "center", padding: "30px" }}>
+      <h2>Event Booking Portal</h2>
+
+      <ChildButton name="Event A" onBook={handleBookEventA} />
+      <ChildButton name="Event B" onBook={handleBookEventB} />
+
+      <br />
+
+      <button onClick={() => setCount(count + 1)}>
+        Re-render Parent ({count})
+      </button>
+    </div>
+  );
+}
